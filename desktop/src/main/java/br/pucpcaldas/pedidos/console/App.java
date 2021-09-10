@@ -1,4 +1,4 @@
-package br.pucpcaldas;
+package br.pucpcaldas.pedidos.console;
 
 /**
  * Hello world!
