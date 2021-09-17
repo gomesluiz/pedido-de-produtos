@@ -7,10 +7,10 @@ import org.junit.Test;
 /**
  * Implementa casos de testes para a classe <code>TestaProduto</code>.
  */
-class TestaProduto {
+public class TestaProduto {
 
     @Test
-    void testeConstrutor_DeveCriarUmProdutoValido() {
+    public void testeConstrutor_DeveCriarUmProdutoValido() {
         Produto caneta = new Produto(1, "caneta", 1.50);
         
         assertEquals(1, caneta.getCodigo());
