@@ -41,7 +41,7 @@
 				<artifactId>flyway-maven-plugin</artifactId>
 				<version>5.0.7</version>
 				<configuration>
-					<url>jdbc:hsqldb:file:data/pedidos</url>
+					<url>jdbc:hsqldb:file:desktop/data/pedidos</url>
 					<user>SA</user>
 				</configuration>
 				<dependencies>

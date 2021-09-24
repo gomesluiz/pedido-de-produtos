@@ -13,6 +13,8 @@ public class Produto {
     private String nome;
     private double preco;
 
+    public static Produto Nulo = new Produto(0, "", 0);
+
     /**
      * Método construtor.
      *
@@ -51,6 +53,24 @@ public class Produto {
      */
     public double getPreco() {
         return preco;
+    }
+
+    /**
+     * Atualiza o nome do produto.
+     *
+     * @return nome do produto
+     */
+    public void setNome(String nome) {
+        this.nome=nome;
+    }
+
+    /**
+     * Atualiza o preço do produto.
+     *
+     * @return preço do produto
+     */
+    public void setPreco(double preco) {
+        this.preco=preco;
     }
 
     @Override
