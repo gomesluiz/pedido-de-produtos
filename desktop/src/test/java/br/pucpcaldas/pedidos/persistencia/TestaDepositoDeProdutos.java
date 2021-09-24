@@ -60,7 +60,9 @@ public class TestaDepositoDeProdutos {
 	public void remove_RemoveUmProdutoNoBancoDeDados() {
 		// Arranjo
 		Produto umaCaneta = caneta;
+
 		// Acao
+		deposito.adiciona(umaCaneta);
 		deposito.remove(umaCaneta);
 
 		// Assercao
