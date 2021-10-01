@@ -55,6 +55,10 @@ public class Produto {
         return preco;
     }
 
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+    
     /**
      * Atualiza o nome do produto.
      *

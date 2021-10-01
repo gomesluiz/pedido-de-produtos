@@ -11,6 +11,7 @@ import org.junit.Test;
 import br.pucpcaldas.pedidos.controle.DepositoDeProdutos;
 import br.pucpcaldas.pedidos.dominio.Produto;
 
+
 public class TestaDepositoDeProdutos {
 
 	private static DepositoDeProdutos deposito;
@@ -18,7 +19,9 @@ public class TestaDepositoDeProdutos {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		deposito = new DepositoDeProdutosEmBancoDeDados();
+		//deposito = new DepositoDeProdutosEmBancoDeDados();
+		deposito = new DepositoDeProdutosComHibernate();
+		
 		caneta = new Produto(1, "Caneta", 2.50);
 		lapis = new Produto(2, "Lapis", 1.50);
 	}
