@@ -3,6 +3,7 @@ package br.pucpcaldas.pedidos.dominio;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+
 /**
  * Um objeto da classe <code>Pedido</code> representa as informações de um
  * pedido efetuado pelo cliente. Um pedido é composto de objetos da classe
@@ -18,10 +19,11 @@ public class Pedido {
 	private Calendar dataDaRealizacao;
 	private Collection<ItemDoPedido> itensDoPedido;
 
-    /**
-     * Construtor da classe.
-     * @param numero    Um número inteiro positivo que identifica um pedido.
-     */
+	/**
+	 * Construtor da classe.
+	 * 
+	 * @param numero Um número inteiro positivo que identifica um pedido.
+	 */
 	public Pedido(int numero) {
 		if (numero < 0) {
 			throw new IllegalArgumentException("O número do pedido deverá ser maior ou igual a zero!");
@@ -31,22 +33,48 @@ public class Pedido {
 		this.itensDoPedido = new ArrayList<ItemDoPedido>();
 	}
 
-    /**
-     * Inclui um item no pedido.
-     * 
-     * @param produto       o produto pedido.
-     * @param quantidade    a quantidade pedida.
-     */
+	/**
+	 * Inclui um item no pedido.
+	 * 
+	 * @param produto    o produto pedido.
+	 * @param quantidade a quantidade pedida.
+	 */
 	public void incluiItem(Produto produto, double quantidade) {
 		this.itensDoPedido.add(new ItemDoPedido(produto, quantidade));
 	}
 
-    /**
-     * Calcula total do pedido que é igual soma do custo total 
-     * de cada item do pedido.
-     * 
-     * @return  total do pedido.
-     */
+	/**
+	 * Remove um item do pedido
+	 * 
+	 * @param produto o produto a ser removido.
+	 * 
+	 * @throws IllegalArgumentException se não existe um item relacionado ao
+	 *                                  produto.
+	 * 
+	 */
+	public void removeItem(Produto produto) {
+
+		ItemDoPedido procurado = null;
+
+		for (ItemDoPedido item : itensDoPedido) {
+			if (item.getProduto().getCodigo() == produto.getCodigo()) {
+				procurado = item;
+				break;
+			}
+		}
+
+		if (procurado == null)
+			throw new IllegalArgumentException("Item inexistente!");
+
+		itensDoPedido.remove(procurado);
+	}
+
+	/**
+	 * Calcula total do pedido que é igual soma do custo total de cada item do
+	 * pedido.
+	 * 
+	 * @return total do pedido.
+	 */
 	public double calculaTotal() {
 		double total = 0.0;
 		for (ItemDoPedido itemDoPedido : itensDoPedido) {
@@ -58,5 +86,25 @@ public class Pedido {
 	@Override
 	public String toString() {
 		return String.format("Pedido %03d# data=%2$te/%2$tm/%2$tY", this.numero, this.dataDaRealizacao);
+	}
+
+	/**
+	 * Calcula frete de um pedido.
+	 * 
+	 * @return frete
+	 */
+	public double calculaFrete() {
+
+		if (itensDoPedido.isEmpty())
+			throw new RuntimeException("Não possível calcular o frete para um produto vazio.");
+
+		double total = this.calculaTotal();
+
+		if (total > 500.00)
+			return 12.00;
+		else if (total > 200.00)
+			return 10.00;
+
+		return 0.0;
 	}
 }

@@ -41,8 +41,6 @@ public class DepositoDeProdutosComHibernate implements DepositoDeProdutos {
 	}
 
 	public void fecha() {
-		//session.close();
 		HibernateUtil.shutdown();
 	}
-
 }
