@@ -36,11 +36,11 @@ public class DepositoDeProdutosComHibernate implements DepositoDeProdutos {
 
 	public Produto listaPor(int codigo) {
 		Produto produto = session.find(Produto.class, codigo);
-		if (produto == null) produto = Produto.Nulo;
+		//if (produto == null) produto = Produto.Nulo;
 		return produto;
 	}
 
 	public void fecha() {
-		HibernateUtil.shutdown();
+		session.close();
 	}
 }

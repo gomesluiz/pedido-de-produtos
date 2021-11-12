@@ -71,7 +71,7 @@ public class DepositoDeProdutosEmBancoDeDados implements DepositoDeProdutos {
 	public Produto listaPor(int codigo) {
 		String sql = "SELECT p.codigo, p.nome, p.preco" + " FROM produtos p " + " WHERE p.codigo = ?";
 
-		Produto umProduto = Produto.Nulo;
+		Produto umProduto = null;
 
 		try {
 			PreparedStatement sel = _conexao.prepareStatement(sql);

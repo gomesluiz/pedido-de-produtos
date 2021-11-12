@@ -9,8 +9,11 @@ package br.pucpcaldas.pedidos.dominio;
  * @see Pedido
  */
 public class ItemDoPedido {
+	private long sequencial;
 	private Produto produto;
 	private double quantidade;
+
+	private Pedido pedido;
 
 	/**
 	 * Construtor da classe.
@@ -18,8 +21,27 @@ public class ItemDoPedido {
 	 * @param produto    o produto associado ao item.
 	 * @param quantidade a quantidade de produtos do item.
 	 */
-	public ItemDoPedido(Produto produto, double quantidade) {
+	public ItemDoPedido(Pedido pedido, Produto produto, double quantidade) {
+		this.pedido = pedido;
 		this.produto = produto;
+		this.quantidade = quantidade;
+	}
+
+	public ItemDoPedido(){}
+
+	public long getSequencial() {
+		return sequencial;
+	}
+
+	public void setSequencial(long sequencial) {
+		this.sequencial = sequencial;
+	}
+
+	public double getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(double quantidade) {
 		this.quantidade = quantidade;
 	}
 
@@ -33,6 +55,10 @@ public class ItemDoPedido {
 		return this.produto.getPreco() * this.quantidade;
 	}
 
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+
 	/**
 	 * Retorna o produto associado ao pedido.
 	 * 
@@ -41,6 +67,15 @@ public class ItemDoPedido {
 	public Produto getProduto() {
 		return this.produto;
 	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+
+	public Pedido getPedido() {
+		return this.pedido;
+	}
+
 
 	@Override
 	public String toString() {

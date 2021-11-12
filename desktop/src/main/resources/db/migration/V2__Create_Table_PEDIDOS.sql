@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS PEDIDOS (
+	numero  INT NOT NULL,
+	data    DATE NOT NULL,
+	PRIMARY KEY(numero) 
+)

@@ -15,6 +15,8 @@ public class Produto {
 
     public static Produto Nulo = new Produto(0, "", 0);
 
+    public Produto() {}
+    
     /**
      * Método construtor.
      *
@@ -55,6 +57,11 @@ public class Produto {
         return preco;
     }
 
+    /**
+     * Modifica o código do produto.
+     * 
+     * @param codigo
+     */
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }

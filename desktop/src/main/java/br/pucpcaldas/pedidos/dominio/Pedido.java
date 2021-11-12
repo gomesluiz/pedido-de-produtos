@@ -1,8 +1,8 @@
 package br.pucpcaldas.pedidos.dominio;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
+import java.util.Set;
+import java.util.Date;
+import java.util.HashSet;
 
 /**
  * Um objeto da classe <code>Pedido</code> representa as informações de um
@@ -16,8 +16,9 @@ import java.util.Collection;
 
 public class Pedido {
 	private int numero;
-	private Calendar dataDaRealizacao;
-	private Collection<ItemDoPedido> itensDoPedido;
+	private Date data;
+	private Set<ItemDoPedido> itens;
+	//public static Pedido Nulo = new Pedido(0);
 
 	/**
 	 * Construtor da classe.
@@ -29,8 +30,34 @@ public class Pedido {
 			throw new IllegalArgumentException("O número do pedido deverá ser maior ou igual a zero!");
 		}
 		this.numero = numero;
-		this.dataDaRealizacao = Calendar.getInstance();
-		this.itensDoPedido = new ArrayList<ItemDoPedido>();
+		this.data = new java.util.Date();
+		this.itens = new HashSet<ItemDoPedido>();
+	}
+
+	public Pedido(){ }
+	
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public Set<ItemDoPedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<ItemDoPedido> itens) {
+		this.itens = itens;
 	}
 
 	/**
@@ -40,7 +67,7 @@ public class Pedido {
 	 * @param quantidade a quantidade pedida.
 	 */
 	public void incluiItem(Produto produto, double quantidade) {
-		this.itensDoPedido.add(new ItemDoPedido(produto, quantidade));
+		this.itens.add(new ItemDoPedido(this, produto, quantidade));
 	}
 
 	/**
@@ -56,7 +83,7 @@ public class Pedido {
 
 		ItemDoPedido procurado = null;
 
-		for (ItemDoPedido item : itensDoPedido) {
+		for (ItemDoPedido item : itens) {
 			if (item.getProduto().getCodigo() == produto.getCodigo()) {
 				procurado = item;
 				break;
@@ -66,7 +93,7 @@ public class Pedido {
 		if (procurado == null)
 			throw new IllegalArgumentException("Item inexistente!");
 
-		itensDoPedido.remove(procurado);
+		itens.remove(procurado);
 	}
 
 	/**
@@ -77,7 +104,7 @@ public class Pedido {
 	 */
 	public double calculaTotal() {
 		double total = 0.0;
-		for (ItemDoPedido itemDoPedido : itensDoPedido) {
+		for (ItemDoPedido itemDoPedido : itens) {
 			total += itemDoPedido.calculaCusto();
 		}
 		return total;
@@ -85,7 +112,7 @@ public class Pedido {
 
 	@Override
 	public String toString() {
-		return String.format("Pedido %03d# data=%2$te/%2$tm/%2$tY", this.numero, this.dataDaRealizacao);
+		return String.format("Pedido %03d# data=%2$te/%2$tm/%2$tY", this.numero, this.data);
 	}
 
 	/**
@@ -95,7 +122,7 @@ public class Pedido {
 	 */
 	public double calculaFrete() {
 
-		if (itensDoPedido.isEmpty())
+		if (itens.isEmpty())
 			throw new RuntimeException("Não possível calcular o frete para um produto vazio.");
 
 		double total = this.calculaTotal();
