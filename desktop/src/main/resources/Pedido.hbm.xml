@@ -1,0 +1,19 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+  "-//Hibernate/Hibernate Mapping DTD//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="br.pucpcaldas.pedidos.dominio.Pedido" table="PEDIDOS">
+		<id name="numero" column="numero" />
+
+		<property name="data">
+			<column name="data" sql-type="Date"/>
+		</property>
+		
+		<set name="itens" table="ITENS" cascade="all" inverse="true" lazy="true" fetch="select">
+			<key column="numero_pedido" not-null="true"/>
+			<one-to-many class="br.pucpcaldas.pedidos.dominio.ItemDoPedido" />
+		</set>
+	</class>
+</hibernate-mapping>

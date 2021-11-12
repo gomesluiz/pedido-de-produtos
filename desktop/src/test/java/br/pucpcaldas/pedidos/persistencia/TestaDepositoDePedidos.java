@@ -34,21 +34,21 @@ public class TestaDepositoDePedidos {
 		umPedido = new Pedido(10);
 		dataEsperada = umPedido.getData();
 
-		// limpa os produtos do banco de dados
-		produtos.remove(caneta);
-		produtos.remove(lapis);
-		
-		// limpa os pedidos do banco de dados
-		pedidos.remove(umPedido);
-
 		// insere os produtos do banco de dados
 		produtos.adiciona(caneta);
 		produtos.adiciona(lapis);
-		
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		// limpa os pedidos do banco de dados
+		pedidos.remove(umPedido);
+
+		// limpa os produtos do banco de dados
+		produtos.remove(caneta);
+		produtos.remove(lapis);
+
+		// fecha a conexão com o banco de dados.
 		produtos.fecha();
 		pedidos.fecha();
 	}
@@ -68,63 +68,6 @@ public class TestaDepositoDePedidos {
 		assertEquals(10, outroPedido.getNumero());
 		assertEquals(dataEsperada,  outroPedido.getData());
 		assertEquals(totalEsperado, outroPedido.calculaTotal(), 0.01);
-		
-		//assertProduto(umaCaneta, outraCaneta);
-	}
-/*
-	@Test
-	public void atualiza_AtualizaUmPedidoNoBancoDeDados() {
-		// Arranjo
-		
-		// Acao
-		deposito.adiciona(umaCaneta);
-		umaCaneta.setNome("Caneta Azul");
-		umaCaneta.setPreco(2.00);
-		deposito.atualiza(umaCaneta);
-
-		// Assercao
-	
 	}
 
-	@Test
-	public void remove_RemoveUmProdutoNoBancoDeDados() {
-		// Arranjo
-		Produto umaCaneta = caneta;
-
-		// Acao
-		deposito.adiciona(umaCaneta);
-		deposito.remove(umaCaneta);
-
-		// Assercao
-		Produto outraCaneta = deposito.listaPor(1);
-		assertProduto(Produto.Nulo, outraCaneta);
-	}
-
-	@Test
-	public void lista_RetornaNuloParaUmProdutoQueNaoExiste() {
-		// Arranjo
-
-		// Acao
-		Produto umaCaneta = deposito.listaPor(-1);
-
-		// Assercao
-
-		assertProduto(Produto.Nulo, umaCaneta);
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		deposito.remove(caneta);
-		deposito.remove(lapis);
-	}
-*/
-	private void assertProduto(Produto produtoAntes, Produto produtoDepois) {
-		assertEquals(produtoAntes.getCodigo(), produtoDepois.getCodigo());
-		assertEquals(produtoAntes.getNome(), produtoDepois.getNome());
-		assertEquals(produtoAntes.getPreco(), produtoDepois.getPreco(), 0.01);
-	}
 }

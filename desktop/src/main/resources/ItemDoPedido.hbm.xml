@@ -1,0 +1,20 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+  "-//Hibernate/Hibernate Mapping DTD//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="br.pucpcaldas.pedidos.dominio.ItemDoPedido" table="ITENS">
+		<id name="sequencial" column="sequencial">
+			<generator class="identity" />
+		</id>
+		
+		<property name="quantidade" column="quantidade" type="double" />
+
+		<many-to-one name="pedido" class="br.pucpcaldas.pedidos.dominio.Pedido" fetch="select"
+			column="numero_pedido" not-null="true" insert="false" update="false"/>
+
+		<many-to-one name="produto" class="br.pucpcaldas.pedidos.dominio.Produto" fetch="select"
+			column="codigo_produto" not-null="true" />
+	</class>
+</hibernate-mapping>

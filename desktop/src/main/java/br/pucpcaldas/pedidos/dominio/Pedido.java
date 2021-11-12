@@ -34,8 +34,16 @@ public class Pedido {
 		this.itens = new HashSet<ItemDoPedido>();
 	}
 
+	//-- Hibernate exige um construtor padrao. 
+	/**
+	 * Construtor padrao.
+	 */
 	public Pedido(){ }
-	
+
+	/**
+	 * 
+	 * @return
+	 */
 	public int getNumero() {
 		return numero;
 	}
@@ -109,12 +117,7 @@ public class Pedido {
 		}
 		return total;
 	}
-
-	@Override
-	public String toString() {
-		return String.format("Pedido %03d# data=%2$te/%2$tm/%2$tY", this.numero, this.data);
-	}
-
+	
 	/**
 	 * Calcula frete de um pedido.
 	 * 
@@ -134,4 +137,10 @@ public class Pedido {
 
 		return 0.0;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("Pedido %03d# data=%2$te/%2$tm/%2$tY", this.numero, this.data);
+	}
+
 }

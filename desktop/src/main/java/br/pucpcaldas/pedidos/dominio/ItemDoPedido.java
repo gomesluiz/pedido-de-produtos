@@ -10,9 +10,13 @@ package br.pucpcaldas.pedidos.dominio;
  */
 public class ItemDoPedido {
 	private long sequencial;
+	
+	//-- referencia a classe Produto
 	private Produto produto;
+
 	private double quantidade;
 
+	//--- referencia a classe Pedido
 	private Pedido pedido;
 
 	/**
@@ -27,20 +31,43 @@ public class ItemDoPedido {
 		this.quantidade = quantidade;
 	}
 
+	//-- Hibernate exige um construtor padrao. 
+	/**
+	 * Construtor padrao.
+	 */
 	public ItemDoPedido(){}
 
+
+	//-- Hibernate exige o par get/set para todos o atributos
+	//-- que serao persistidos.
+	/**
+	 * Retorna o sequencial do item do pedido.
+	 * @return
+	 */
 	public long getSequencial() {
 		return sequencial;
 	}
 
+	/**
+	 * Modifica o sequencial do item do pedido.
+	 * @param sequencial
+	 */
 	public void setSequencial(long sequencial) {
 		this.sequencial = sequencial;
 	}
 
+	/**
+	 * Retorna a quantidade do item do pedido.
+	 * @return
+	 */
 	public double getQuantidade() {
 		return quantidade;
 	}
 
+	/**
+	 * Modifica a quantidade do item do pedido.
+	 * @param quantidade
+	 */
 	public void setQuantidade(double quantidade) {
 		this.quantidade = quantidade;
 	}
@@ -68,14 +95,21 @@ public class ItemDoPedido {
 		return this.produto;
 	}
 
+	/**
+	 * Modifica o pedido associado ao item do pedido.
+	 * @param pedido
+	 */
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
 
+	/**
+	 * Retorna o pedido associado ao item do pedido.
+	 * @return
+	 */
 	public Pedido getPedido() {
 		return this.pedido;
 	}
-
 
 	@Override
 	public String toString() {
