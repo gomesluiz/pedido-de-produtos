@@ -2,7 +2,9 @@ package br.pucpcaldas.pedidos.persistencia;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -11,7 +13,9 @@ import org.junit.Test;
 import br.pucpcaldas.pedidos.controle.DepositoDePedidos;
 import br.pucpcaldas.pedidos.controle.DepositoDeProdutos;
 import br.pucpcaldas.pedidos.dominio.Pedido;
+import br.pucpcaldas.pedidos.dominio.ItemDoPedido;
 import br.pucpcaldas.pedidos.dominio.Produto;
+
 
 public class TestaDepositoDePedidos {
 
@@ -59,6 +63,7 @@ public class TestaDepositoDePedidos {
 		umPedido.incluiItem(caneta, 10.0);
 		umPedido.incluiItem(lapis, 10.0);
 		double totalEsperado = umPedido.calculaTotal();
+		List<ItemDoPedido> esperados = new ArrayList<ItemDoPedido>(umPedido.getItens());
 		
 		// Acao
 		pedidos.adiciona(umPedido);
@@ -68,6 +73,11 @@ public class TestaDepositoDePedidos {
 		assertEquals(10, outroPedido.getNumero());
 		assertEquals(dataEsperada,  outroPedido.getData());
 		assertEquals(totalEsperado, outroPedido.calculaTotal(), 0.01);
+		for (ItemDoPedido item:outroPedido.getItens())
+		{
+			ItemDoPedido esperado = esperados.get((int)item.getSequencial());
+			assertEquals(esperado.getSequencial(), item.getSequencial());
+			assertEquals(esperado.getQuantidade(), item.getQuantidade(), 0.01);
+		}
 	}
-
 }

@@ -20,6 +20,5 @@
     <mapping resource="Produto.hbm.xml"></mapping>
     <mapping resource="Pedido.hbm.xml"></mapping> 
     <mapping resource="ItemDoPedido.hbm.xml"></mapping>
-     
   </session-factory>
 </hibernate-configuration>

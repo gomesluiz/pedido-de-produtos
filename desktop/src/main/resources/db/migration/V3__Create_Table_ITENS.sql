@@ -6,6 +6,6 @@ CREATE TABLE IF NOT EXISTS ITENS (
 	
   	PRIMARY KEY(sequencial),
 	
-  	FOREIGN KEY(numero_pedido) REFERENCES PUBLIC.PEDIDOS(numero),
+  	FOREIGN KEY(numero_pedido)  REFERENCES PUBLIC.PEDIDOS(numero),
   	FOREIGN KEY(codigo_produto) REFERENCES PUBLIC.PRODUTOS(codigo)
- );
+)
